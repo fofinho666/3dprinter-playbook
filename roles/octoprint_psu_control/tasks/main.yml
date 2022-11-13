@@ -1,0 +1,21 @@
+- name: Install PSU Control via pip
+  pip:
+    name: https://github.com/RoboMagus/OctoPrint-PreheatHelper/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+
+- name: Add PSU Control settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.psucontrol
+    value:
+      _config_version: 4
+      autoOn: true
+      connectOnPowerOn: true
+      disconnectOnPowerOff: true
+      idleTimeout: "30"
+      offSysCommand: "python3 {{ prusa_psu_relay_path }}/relay.py off"
+      onSysCommand: "python3 {{ prusa_psu_relay_path }}/relay.py on"
+      powerOffWhenIdle: true
+      switchingMethod: SYSTEM
+      turnOnWhenApiUploadPrint: true

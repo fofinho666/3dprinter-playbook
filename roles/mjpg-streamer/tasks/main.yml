@@ -1,0 +1,46 @@
+---
+- name: Install required system packages for MJPG-Streamer
+  apt:
+    pkg:
+      - subversion
+      - libjpeg8-dev
+      - imagemagick
+      - ffmpeg
+      - libv4l-dev
+      - cmake
+    state: latest
+    update_cache: true
+
+- name: Clone MJPG-Streamer repository
+  git:
+    repo: "{{ mjpg_streamer_repo }}"
+    dest: "{{ mjpg_streamer_path }}"
+    clone: yes
+    update: yes
+
+- name: Build MJPG-Streamer
+  make:
+    chdir: "{{ mjpg_streamer_experimental_path }}"
+  environment:
+    LD_LIBRARY_PATH: "{{ mjpg_streamer_experimental_path }}"
+
+- name: Create scripts directory
+  file:
+    path: "{{ scripts_path }}"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+
+- name: Install webcamDeamon script
+  template:
+    src: webcamDeamon.j2
+    dest: "{{ scripts_path }}/webcamDeamon"
+    mode: a+x
+
+- name: Install webcamd.service
+  template:
+    src: webcamd.service.j2
+    dest: /etc/systemd/system/webcamd.service
+    owner: "{{ ansible_user }}"
+  notify:
+    - Restart webcamd service

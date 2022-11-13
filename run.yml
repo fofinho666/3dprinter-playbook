@@ -1,0 +1,67 @@
+---
+- name: Setup 3dprinter-server
+  hosts: 3dprinter-server
+  become: true
+
+  vars_files:
+    - secret.yml
+
+  pre_tasks:
+    - name: Install aptitude
+      apt:
+        name: aptitude
+        state: latest
+        update_cache: true
+
+  roles:
+    - role: octoprint
+      tags:
+        - octoprint
+
+    - role: haproxy
+      tags:
+        - haproxy
+
+    - role: mjpg-streamer
+      tags:
+        - mjpg-streamer
+
+    - role: octoprint_webcam_actions
+      tags:
+        - webcam_actions
+        - octoprint
+
+    - role: octoprint_display_eta
+      tags:
+        - display_eta
+        - extensions
+
+    - role: octoprint_firmware_updater
+      tags:
+        - firmware_updater
+        - extensions
+
+    - role: octoprint_m73_eta_override
+      tags:
+        - m73_eta_override
+        - extensions
+
+    - role: octoprint_preheat_helper
+      tags:
+        - preheat_helper
+        - extensions
+
+    - role: octoprint_psu_control
+      tags:
+        - psu_control
+        - extensions
+
+    - role: octoprint_tab_order
+      tags:
+        - tab_order
+        - extensions
+
+    - role: octoprint_themeify
+      tags:
+        - themeify
+        - extensions

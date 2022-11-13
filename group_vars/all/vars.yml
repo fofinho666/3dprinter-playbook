@@ -1,0 +1,17 @@
+install_path: "/home/{{ ansible_user }}"
+
+octoprint_path: "{{ install_path }}/octoprint"
+venv_path: "{{ octoprint_path }}/venv"
+octoprint_config_path: "{{ install_path }}/.octoprint"
+
+octoprint_url: "https://get.octoprint.org/latest"
+
+mjpg_streamer_repo: https://github.com/jacksonliam/mjpg-streamer.git
+
+mjpg_streamer_path: "{{ install_path }}/mjpg-streamer"
+mjpg_streamer_experimental_path: "{{ mjpg_streamer_path }}/mjpg-streamer-experimental"
+
+scripts_path: "{{ install_path }}/scripts"
+
+prusa_psu_relay_repo: https://github.com/fofinho666/prusa_psu_relay.git
+prusa_psu_relay_path: "{{ install_path }}/prusa_psu_relay"

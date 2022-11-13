@@ -1,0 +1,7 @@
+---
+- name: Restart webcamd service
+  systemd:
+    name: webcamd
+    enabled: true
+    state: restarted
+    daemon_reload: true

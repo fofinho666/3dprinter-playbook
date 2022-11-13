@@ -1,0 +1,5 @@
+---
+dependencies:
+  - src: kwoodson.yedit
+  - role: octoprint
+  - role: mjpg-streamer

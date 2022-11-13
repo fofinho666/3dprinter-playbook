@@ -1,0 +1,8 @@
+---
+- name: Install M73 ETA Override via pip
+  pip:
+    name: https://github.com/gdombiak/OctoPrint-M73ETAOverride/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+  notify:
+    - Restart octoprint service

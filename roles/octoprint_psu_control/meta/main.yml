@@ -1,0 +1,4 @@
+---
+dependencies:
+  - src: kwoodson.yedit
+  - role: octoprint

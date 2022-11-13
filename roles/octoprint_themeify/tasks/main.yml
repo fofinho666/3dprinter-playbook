@@ -1,0 +1,27 @@
+- name: Install Themeify via pip
+  pip:
+    name: https://github.com/birkbjo/OctoPrint-Themeify/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+
+- name: Add Themeify settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.themeify
+    value:
+      customRules:
+        - enabled: false
+          rule: background-color
+          selector: .navbar-inner
+          value: "#2f3136"
+        - enabled: false
+          rule: background-color
+          selector: .accordion
+          value: "#2f3136"
+        - enabled: true
+          rule: border-bottom
+          selector: .dropdown-toggle
+          value: none
+      enableCustomization: true
+  notify:
+    - Restart octoprint service

@@ -1,0 +1,52 @@
+- name: Install Tab Order via pip
+  pip:
+    name: https://github.com/jneilliii/OctoPrint-TabOrder/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+
+- name: Add Tab Order settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.taborder
+    value:
+      _config_version: 5
+      hidden_tabs:
+        - icon: ""
+          icon_color: ""
+          icon_tooltip: ""
+          name: terminal
+          showtext: true
+          usetitle: false
+        - icon: ""
+          icon_color: ""
+          icon_tooltip: ""
+          name: timelapse
+          showtext: true
+          usetitle: false
+      tabs:
+        - icon: fas fa-gamepad
+          icon_color: ""
+          icon_tooltip: ""
+          name: control
+          showtext: true
+          usetitle: false
+        - icon: fas fa-thermometer-half
+          icon_color: "#ff0000"
+          icon_tooltip: ""
+          name: temperature
+          showtext: true
+          usetitle: false
+        - icon: fas fa-eye
+          icon_color: "#0000ff"
+          icon_tooltip: gcode Viewer
+          name: gcodeviewer
+          showtext: true
+          usetitle: true
+        - icon: far fa-calendar-alt
+          icon_color: yellow
+          icon_tooltip: ""
+          name: plugin_printscheduler
+          showtext: true
+          usetitle: false
+  notify:
+    - Restart octoprint service

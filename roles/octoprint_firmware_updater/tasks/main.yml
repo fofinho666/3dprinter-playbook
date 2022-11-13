@@ -1,0 +1,38 @@
+---
+- name: Install avrdude
+  apt:
+    pkg:
+      - avrdude
+    state: latest
+    update_cache: true
+
+- name: Get avrdude path
+  command: which avrdude
+  register: avrdude_path
+- set_fact:
+    avrdude_path: "{{ avrdude_path.stdout }}"
+
+- name: Install Firmware Updater via pip
+  pip:
+    name: https://github.com/OctoPrint/OctoPrint-FirmwareUpdater/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+
+- name: Add Firmware Updater settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.firmwareupdater
+    value:
+      _config_version: 3
+      _selected_profile: 0
+      profiles:
+        - _id: 0
+          _name: Default
+          avrdude_avrmcu: m2560
+          avrdude_baudrate: 250000
+          avrdude_path: "{{ avrdude_path }}"
+          avrdude_programmer: wiring
+          flash_method: avrdude
+          serial_port: /dev/ttyACM0
+  notify:
+    - Restart octoprint service

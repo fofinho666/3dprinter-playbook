@@ -1,0 +1,8 @@
+---
+- name: Install Display ETA via pip
+  pip:
+    name: https://github.com/AlexVerrico/Octoprint-Display-ETA/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+  notify:
+    - Restart octoprint service
