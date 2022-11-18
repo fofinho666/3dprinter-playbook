@@ -4,6 +4,13 @@
     virtualenv: "{{ venv_path }}"
   become: False
 
+- name: Clone Prusa PSU Relay repository
+  git:
+    repo: "{{ prusa_psu_relay_repo }}"
+    dest: "{{ prusa_psu_relay_path }}"
+    clone: yes
+    update: yes
+
 - name: Add PSU Control settings
   yedit:
     src: "{{octoprint_config_path}}/config.yaml"
