@@ -6,9 +6,9 @@
     state: latest
     update_cache: true
 
-- name: Set HAProxy configurations
-  template:
-    src: haproxy.cfg.j2
+- name: Copy HAProxy configurations
+  copy:
+    src: haproxy.cfg
     dest: /etc/haproxy/haproxy.cfg
   notify:
     - Restart haproxy service
