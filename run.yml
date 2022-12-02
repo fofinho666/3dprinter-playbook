@@ -29,7 +29,6 @@
     - role: octoprint_webcam_actions
       tags:
         - webcam_actions
-        - octoprint
 
     - role: octoprint_display_eta
       tags:

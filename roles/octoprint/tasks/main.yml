@@ -40,6 +40,23 @@
     name: "{{ octoprint_url }}"
     virtualenv: "{{ venv_path }}"
 
+- name: Copy default Printer Profile 
+  copy:
+    src: _default.profile
+    dest: "{{ octoprint_config_path }}/printerProfiles/_default.profile"
+  notify:
+    - Restart octoprint service
+    
+- name: Set our OctoPrint API Key
+  when: octoprint_api_key is defined
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: api
+    value:
+      key: "{{ octoprint_api_key }}"
+  notify:
+    - Restart octoprint service
+
 - name: Install octoprint systemd service template
   template:
     src: octoprint.service.j2
