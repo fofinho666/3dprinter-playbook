@@ -4,11 +4,16 @@ Ansible playbook to setup my 3dprinter server 🐙🖨️🌐
 
 It setups [mjpg-streamer](https://github.com/jacksonliam/mjpg-streamer), [haproxy](https://www.haproxy.org/), [octoprint](https://octoprint.org/) and extensions
 
+## Requirements 
+- Computer with **Ubuntu server** installed 
 ## Setup
 - Install ansible `brew install ansible`
 - Install ansible role dependencies `ansible-galaxy install -r requirements.yml`
-- Setup ansible vault `ansible-vault new secret.yml`, check the **secret_example.yml** to know the secrets to add 
+- Establish `ssh` connection with your **Ubuntu server**
 - Add the public ssh key to the server `ssh-copy-id user@host`
+- Setup ansible vault:
+  - Rename `secret_example.yml` to `secret.yml` and fill it with real data
+  - Encrypt it with `ansible-vault encrypt secret.yml`
 
 ## Run
 - Run the hole playbook `ansible-playbook run.yml`
