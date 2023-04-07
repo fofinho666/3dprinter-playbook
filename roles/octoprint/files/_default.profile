@@ -26,7 +26,13 @@ id: _default
 model: Prusa i3 MK2.5S
 name: Prusa
 volume:
-  custom_box: false
+  custom_box:
+    x_max: 250.0
+    x_min: 0.0
+    y_max: 210.0
+    y_min: 0.0
+    z_max: 210.0
+    z_min: -0.05
   depth: 210.0
   formFactor: rectangular
   height: 210.0
