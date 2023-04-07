@@ -69,3 +69,8 @@
       tags:
         - slicer_thumbnails
         - extensions
+
+    - role: octoprint_octopod
+      tags:
+        - octopod
+        - extensions

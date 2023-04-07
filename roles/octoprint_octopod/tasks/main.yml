@@ -1,0 +1,7 @@
+- name: Install OctoPod via pip
+  pip:
+    name: https://github.com/gdombiak/OctoPrint-OctoPod/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+  notify:
+    - Restart octoprint service
