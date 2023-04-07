@@ -64,3 +64,8 @@
       tags:
         - themeify
         - extensions
+
+    - role: octoprint_slicer_thumbnails
+      tags:
+        - slicer_thumbnails
+        - extensions

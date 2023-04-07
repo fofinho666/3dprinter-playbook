@@ -1,0 +1,19 @@
+- name: Install Slicer Thumbnails via pip
+  pip:
+    name: https://github.com/jneilliii/OctoPrint-PrusaSlicerThumbnails/archive/master.zip
+    virtualenv: "{{ venv_path }}"
+  become: False
+
+- name: Add Slicer Thumbnails settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.prusaslicerthumbnails
+    value:
+      align_inline_thumbnail: true
+      filelist_height: '500'
+      inline_thumbnail: true
+      inline_thumbnail_align_value: center
+      inline_thumbnail_scale_value: '30'
+      scale_inline_thumbnail: true
+  notify:
+    - Restart octoprint service
