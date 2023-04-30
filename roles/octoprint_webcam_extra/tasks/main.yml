@@ -1,0 +1,5 @@
+- name: Install Webcam extras via pip
+  pip:
+    name: https://github.com/poulou0/OctoPrint-WebcamExtras/archive/refs/heads/main.zip
+    virtualenv: "{{ venv_path }}"
+  become: False

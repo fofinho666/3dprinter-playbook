@@ -30,6 +30,10 @@
       tags:
         - webcam_actions
 
+    - role: octoprint_webcam_extra
+      tags:
+        - webcam_extra
+
     - role: octoprint_display_eta
       tags:
         - display_eta
