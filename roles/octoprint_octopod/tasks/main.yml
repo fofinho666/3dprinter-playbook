@@ -5,3 +5,14 @@
   become: False
   notify:
     - Restart octoprint service
+
+- name: Add OctoPod settings
+  yedit:
+    src: "{{octoprint_config_path}}/config.yaml"
+    key: plugins.octopod
+    value:
+      _config_version: 13
+      bed_target_temp_hold: '30'
+  notify:
+    - Restart octoprint service
+    
