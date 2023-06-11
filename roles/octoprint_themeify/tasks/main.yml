@@ -22,6 +22,10 @@
           rule: border-bottom
           selector: .dropdown-toggle
           value: none
+        - enabled: true
+          rule: color
+          selector: .icon-black
+          value: '#ffffff'
       enableCustomization: true
   notify:
     - Restart octoprint service
